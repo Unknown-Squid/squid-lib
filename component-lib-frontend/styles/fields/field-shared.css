@@ -1,0 +1,85 @@
+/**
+ * Shared field chrome — use on input, textarea, select, file.
+ * Vanilla: <input class="ui-field-control ui-input" />
+ */
+
+.ui-field-control {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  font-family: inherit;
+  font-weight: 400;
+  outline: none;
+  border-width: 0.5px;
+  border-style: solid;
+  border-color: var(--color-border-primary);
+  background: var(--color-background-primary);
+  font-size: var(--font-size-input);
+  color: var(--color-text-primary);
+  border-radius: var(--border-radius-md);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.ui-field-control::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.ui-field-control:hover:not(:disabled) {
+  border-color: var(--color-border-secondary);
+}
+
+.ui-field-control:focus-visible {
+  border-color: var(--color-text-primary);
+  box-shadow: var(--focus-ring-default);
+}
+
+.ui-field-control:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.ui-field-control--error {
+  border-color: var(--color-border-danger);
+  box-shadow: var(--focus-ring-error);
+}
+
+.ui-field-control--error:hover:not(:disabled) {
+  border-color: var(--color-border-danger);
+}
+
+.ui-field-control--error:focus-visible {
+  border-color: var(--color-border-danger);
+  box-shadow: var(--focus-ring-error);
+}
+
+.ui-field-control--success {
+  border-color: var(--color-border-success);
+  box-shadow: var(--focus-ring-success);
+}
+
+.ui-field-control--success:hover:not(:disabled) {
+  border-color: var(--color-border-success);
+}
+
+.ui-field-control--success:focus-visible {
+  border-color: var(--color-border-success);
+  box-shadow: var(--focus-ring-success);
+}
+
+.ui-field-control--warning {
+  border-color: var(--color-border-warning);
+  box-shadow: var(--focus-ring-warning);
+}
+
+.ui-field-control--warning:hover:not(:disabled) {
+  border-color: var(--color-border-warning);
+}
+
+.ui-field-control--warning:focus-visible {
+  border-color: var(--color-border-warning);
+  box-shadow: var(--focus-ring-warning);
+}

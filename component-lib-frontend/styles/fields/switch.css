@@ -1,0 +1,90 @@
+/* Switch — vanilla: label.ui-switch-item > input[role=switch] + span.ui-switch-track */
+
+.ui-switch-item,
+.switch-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.ui-switch-item:has(input:disabled),
+.switch-item:has(input:disabled) {
+  cursor: not-allowed;
+}
+
+.ui-switch-item input[type="checkbox"],
+.switch-item input[type="checkbox"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ui-switch-track,
+.switch-track {
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  background: var(--color-border-secondary);
+  position: relative;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.ui-switch-thumb,
+.switch-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-control-on);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.ui-switch-item input:checked + .ui-switch-track,
+.ui-switch-item input:checked + .switch-track,
+.switch-item input:checked + .ui-switch-track,
+.switch-item input:checked + .switch-track {
+  background: var(--color-text-primary);
+}
+
+.ui-switch-item input:checked + .ui-switch-track .ui-switch-thumb,
+.ui-switch-item input:checked + .switch-track .switch-thumb,
+.switch-item input:checked + .ui-switch-track .ui-switch-thumb,
+.switch-item input:checked + .switch-track .switch-thumb {
+  transform: translateX(16px);
+}
+
+.ui-switch-item input:disabled + .ui-switch-track,
+.ui-switch-item input:disabled + .switch-track,
+.switch-item input:disabled + .ui-switch-track,
+.switch-item input:disabled + .switch-track {
+  opacity: 0.4;
+}
+
+.ui-switch-item input:focus-visible + .ui-switch-track,
+.ui-switch-item input:focus-visible + .switch-track,
+.switch-item input:focus-visible + .ui-switch-track,
+.switch-item input:focus-visible + .switch-track {
+  box-shadow: var(--focus-ring-default);
+}
+
+.ui-switch-item input[aria-invalid="true"]:focus-visible + .ui-switch-track,
+.ui-switch-item input[aria-invalid="true"]:focus-visible + .switch-track,
+.switch-item input[aria-invalid="true"]:focus-visible + .ui-switch-track,
+.switch-item input[aria-invalid="true"]:focus-visible + .switch-track {
+  box-shadow: var(--focus-ring-error);
+}

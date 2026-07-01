@@ -1,0 +1,132 @@
+---
+description: AI documentation rulebook for markdown module docs and inline code comments
+globs: component-lib-frontend/**/*
+alwaysApply: false
+---
+
+# AI documentation rulebook
+
+Two scopes — use both when working in this repo:
+
+| Scope | Rule file | Applies to |
+|-------|-----------|------------|
+| **Markdown module docs** | This file (sections below) | `*.md`, `*.mdx`, README-style docs |
+| **Source file layout** | `code-file-layout.mdc` | `*.ts`, `*.tsx` — imports, grouping, JSX `{/* … */}` |
+
+---
+
+## Documentation writing contract
+
+- Be factual, based on code
+- Do not assume behavior not present in code
+- Prefer clarity over length
+- Use consistent section structure
+
+## Before writing documentation
+
+AI must:
+
+1. Identify the file/folder role in the system
+2. Identify inputs and outputs
+3. Identify dependencies (imports, services, hooks)
+4. Identify side effects (API calls, DB calls)
+
+## Level of detail
+
+Documentation must explain:
+
+- Why this file exists
+- What problem it solves
+- How it interacts with other parts of the system
+
+## Avoid bad documentation
+
+Do **not** write vague statements like: “This function sets the state.”
+
+Write meaningful intent instead.
+
+## Formatting rules (markdown)
+
+- Use headings (`##`)
+- Use bullet points
+- Use code blocks for examples
+- Avoid long paragraphs
+
+## Cross reference rule
+
+Always mention related files, hooks, services, APIs.
+
+## Source of truth
+
+Documentation must be derived from actual code. Never invent behavior.
+
+## Update rules
+
+When updating documentation:
+
+1. Do **not** rewrite the whole document
+2. Only update affected sections
+3. Append to **CHANGE TIMELINE**
+4. Update **Last Updated**
+5. Use emphasis markers
+
+## Emphasis rule
+
+- 🔄 Updated
+- 🆕 Added
+- ❌ Removed
+
+---
+
+## Document metadata (module docs)
+
+Include at the top or bottom of each module doc:
+
+- **File/Module Name:**
+- **Document Created:**
+- **Last Updated:**
+- **Author:** AI Documentation System
+- **Source Code Path:**
+
+## CHANGE TIMELINE
+
+| Date | What Changed | Reason | Sections Updated |
+|------|--------------|--------|------------------|
+| | | | |
+
+---
+
+## Required sections (module doc template)
+
+Use this structure for component/module documentation:
+
+## Purpose
+
+## Location
+
+## Responsibilities
+
+## Dependencies
+
+## Data Flow
+
+## Key Functions / Methods
+
+## Usage Example
+
+## Edge Cases
+
+## Related Files
+
+---
+
+## Inline / source documentation
+
+For **TypeScript and React source files**, follow **`code-file-layout.mdc`**:
+
+- Imports first, organized with **grouped `//` comments**
+- Functions, variables, and components grouped with **`// --- Section ---`** headers
+- All variables and logic **above** `return` (hooks → derived → handlers)
+- Inside `return`: **`{/* concise block comment */}`** above each major element or component — uniform labels across the codebase
+
+Do not duplicate the full layout spec here; keep markdown rules in this file and code layout in `code-file-layout.mdc`.

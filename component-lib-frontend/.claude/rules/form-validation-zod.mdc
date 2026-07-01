@@ -1,0 +1,82 @@
+---
+description: Form validation with Zod schemas, inferred types, and FormField error/success mapping
+globs: component-lib-frontend/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Form validation (Zod)
+
+Use **Zod** for all field and form validation in `component-lib-frontend/`. Do not add ad-hoc regex validators outside `src/validation/`.
+
+## Layout
+
+| Path | Role |
+|------|------|
+| `src/validation/schemas/fields.ts` | Reusable field schemas (`emailFieldSchema`, `passwordFieldSchema`, …) |
+| `src/validation/schemas/forms.ts` | Full form objects + `z.infer` types |
+| `src/validation/validate-field.ts` | `validateFieldValue()` → `{ valid, message }` |
+| `src/validation/form-errors.ts` | `safeParseForm()`, `formatZodFormErrors()` |
+| `src/validation/field-messages.ts` | `formFieldMessagesLive()` → FormField `error` / `success` |
+| `src/types/fields.ts` | UI prop enums (`FieldSize`, `FieldStatus`, …) |
+| `src/types/components.ts` | Page/template types + re-exported form value types |
+
+Import: `import { … } from "@/validation"` or `@/types`.
+
+## Field-level (live typing)
+
+```tsx
+import {
+  emailFieldSchema,
+  validateFieldValue,
+  formFieldMessagesLive,
+} from "@/validation";
+
+const emailResult = validateFieldValue(emailFieldSchema, email, {
+  successMessage: "Email looks good.",
+});
+
+<FormField
+  label="Email"
+  {...formFieldMessagesLive(emailResult, {
+    touched: email.length > 0,
+    submitted,
+  })}
+>
+  <Input type="email" value={email} onChange={…} />
+</FormField>
+```
+
+## Form-level (submit)
+
+```tsx
+import { registrationFormSchema, safeParseForm } from "@/validation";
+
+const parsed = safeParseForm(registrationFormSchema, {
+  firstName,
+  lastName,
+  email,
+  password,
+  terms,
+});
+
+if (!parsed.success) {
+  setFieldErrors(parsed.fieldErrors);
+  return;
+}
+// parsed.data is typed RegistrationFormValues
+```
+
+## Rules
+
+1. **One schema per field** in `schemas/fields.ts` — reuse in form schemas via composition.
+2. **Form types** = `z.infer<typeof myFormSchema>` in `schemas/forms.ts`; export via `src/types/components.ts` when used in pages.
+3. Wire UI through **FormField** `error` / `success` / `warning` / `info` — not duplicate `<FieldError>` under the control unless standalone.
+4. **Success messages** only after valid parse; use `formFieldMessagesLive` for touch/submit gating.
+5. `@/utils/field-validation` is legacy — new code uses `@/validation` directly.
+
+## New field checklist
+
+- [ ] Add Zod schema in `schemas/fields.ts`
+- [ ] Compose into form schema if needed
+- [ ] Export inferred type if used outside validation
+- [ ] Storybook/template demonstrates error + success states

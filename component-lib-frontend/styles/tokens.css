@@ -1,0 +1,119 @@
+/**
+ * Design tokens — single source of truth for colors, type, spacing, focus.
+ * Import this file in vanilla HTML/CSS or via globals.css in the app.
+ */
+:root {
+  --font-sans: var(--font-geist-sans, system-ui, sans-serif);
+
+  --color-background-primary: #fcfcfa;
+  --color-background-secondary: #f3f2ed;
+  --color-background-tertiary: #e8e7e1;
+  --color-background-info: #e6f1fb;
+  --color-background-success: #eaf3de;
+  --color-background-warning: #faeeda;
+  --color-background-danger: #fcebeb;
+
+  --color-text-primary: #161712;
+  --color-text-secondary: #4d4f48;
+  --color-text-tertiary: #70736a;
+  --color-text-info: #0c447c;
+  --color-text-success: #27500a;
+  --color-text-warning: #633806;
+  --color-text-danger: #791f1f;
+
+  --color-border-tertiary: rgba(22, 23, 18, 0.18);
+  --color-border-secondary: rgba(22, 23, 18, 0.28);
+  --color-border-primary: rgba(22, 23, 18, 0.46);
+  --color-border-info: #185fa5;
+  --color-border-success: #3b6d11;
+  --color-border-warning: #854f0b;
+  --color-border-danger: #a32d2d;
+
+  --color-control-on: #ffffff;
+  --color-surface-page: var(--color-background-tertiary);
+  --color-surface-panel: var(--color-background-secondary);
+  --color-surface-field: var(--color-background-primary);
+
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --border-radius-pill: 999px;
+  --border-radius-checkbox: 5px;
+
+  --focus-ring-default: 0 0 0 3px
+    color-mix(in srgb, var(--color-text-primary) 12%, transparent);
+  --focus-ring-error: 0 0 0 3px
+    color-mix(in srgb, var(--color-border-danger) 18%, transparent);
+  --focus-ring-success: 0 0 0 3px
+    color-mix(in srgb, var(--color-border-success) 18%, transparent);
+  --focus-ring-warning: 0 0 0 3px
+    color-mix(in srgb, var(--color-border-warning) 18%, transparent);
+
+  --font-size-label: 13px;
+  --font-size-input: 14px;
+  --font-size-helper: 12px;
+  --font-size-button-sm: 13px;
+  --font-size-button: 14px;
+  --font-size-button-lg: 15px;
+  --font-size-badge: 12px;
+  --font-size-section-label: 11px;
+
+  --field-height: 36px;
+  --field-height-sm: 32px;
+  --field-height-lg: 44px;
+  --textarea-min-height: 5rem;
+
+  --button-height-sm: 28px;
+  --button-height: 36px;
+  --button-height-lg: 44px;
+
+  --gap-label-control: 6px;
+  --gap-control-hint: 6px;
+  --gap-fields: 16px;
+
+  --background: var(--color-background-primary);
+  --foreground: var(--color-text-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background-primary: #181a18;
+    --color-background-secondary: #202420;
+    --color-background-tertiary: #121512;
+    --color-background-info: #0c447c;
+    --color-background-success: #27500a;
+    --color-background-warning: #633806;
+    --color-background-danger: #791f1f;
+
+    --color-text-primary: #eff2ec;
+    --color-text-secondary: #c5ccc0;
+    --color-text-tertiary: #9ba396;
+    --color-text-info: #85b7eb;
+    --color-text-success: #97c459;
+    --color-text-warning: #ef9f27;
+    --color-text-danger: #f09595;
+
+    --color-border-tertiary: rgba(239, 242, 236, 0.2);
+    --color-border-secondary: rgba(239, 242, 236, 0.3);
+    --color-border-primary: rgba(239, 242, 236, 0.42);
+    --color-border-info: #378add;
+    --color-border-success: #639922;
+    --color-border-warning: #ba7517;
+    --color-border-danger: #e24b4a;
+
+    --focus-ring-default: 0 0 0 3px
+      color-mix(in srgb, var(--color-text-primary) 14%, transparent);
+    --focus-ring-error: 0 0 0 3px
+      color-mix(in srgb, var(--color-border-danger) 22%, transparent);
+    --focus-ring-success: 0 0 0 3px
+      color-mix(in srgb, var(--color-border-success) 22%, transparent);
+    --focus-ring-warning: 0 0 0 3px
+      color-mix(in srgb, var(--color-border-warning) 22%, transparent);
+
+    --background: var(--color-background-primary);
+    --foreground: var(--color-text-primary);
+    --color-surface-page: var(--color-background-tertiary);
+    --color-surface-panel: var(--color-background-secondary);
+    --color-surface-field: var(--color-background-primary);
+  }
+}

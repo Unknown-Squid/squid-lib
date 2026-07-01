@@ -1,0 +1,24 @@
+/**
+ * Text input — vanilla: <input type="text" class="ui-field-control ui-input" />
+ */
+
+.ui-input {
+  height: var(--field-height);
+  padding-inline: 0.75rem;
+}
+
+.ui-input--sm {
+  height: var(--field-height-sm);
+  font-size: var(--font-size-button-sm);
+}
+
+.ui-input--lg {
+  height: var(--field-height-lg);
+  font-size: var(--font-size-button-lg);
+}
+
+/* .ui-input-wrap — see utilities.css */
+
+.ui-input--with-toggle {
+  padding-inline-end: 5rem;
+}

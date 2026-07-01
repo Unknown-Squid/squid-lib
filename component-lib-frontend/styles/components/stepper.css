@@ -1,0 +1,135 @@
+/* Multi-step progress (forms / wizard) */
+
+.ui-stepper {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.ui-stepper__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  align-items: flex-start;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .ui-stepper__list {
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+}
+
+.ui-stepper__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+@media (min-width: 640px) {
+  .ui-stepper__item {
+    flex: 1 1 0;
+  }
+}
+
+.ui-stepper__segment {
+  display: contents;
+}
+
+.ui-stepper__button {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0.5rem 0.375rem;
+  border: none;
+  background: transparent;
+  cursor: default;
+  text-align: start;
+  font: inherit;
+  color: var(--color-text-tertiary);
+  border-radius: var(--border-radius-md);
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.ui-stepper__button--clickable {
+  cursor: pointer;
+}
+
+.ui-stepper__button--clickable:hover {
+  background: var(--color-background-secondary);
+  color: var(--color-text-primary);
+}
+
+.ui-stepper__button--current {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.ui-stepper__button--complete {
+  color: var(--color-text-success);
+}
+
+.ui-stepper__bullet {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-badge);
+  font-weight: 600;
+  border: 0.5px solid var(--color-border-secondary);
+  background: var(--color-background-primary);
+}
+
+.ui-stepper__button--current .ui-stepper__bullet {
+  border-color: var(--color-text-primary);
+  background: var(--color-text-primary);
+  color: var(--color-background-primary);
+}
+
+.ui-stepper__button--complete .ui-stepper__bullet {
+  border-color: var(--color-border-success);
+  background: var(--color-background-success);
+  color: var(--color-text-success);
+}
+
+.ui-stepper__label {
+  min-width: 0;
+}
+
+.ui-stepper__label-text {
+  display: block;
+  font-size: var(--font-size-button-sm);
+  white-space: normal;
+}
+
+.ui-stepper__connector {
+  display: none;
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 0.125rem;
+  background: var(--color-border-secondary);
+}
+
+@media (min-width: 640px) {
+  .ui-stepper__connector {
+    display: block;
+  }
+
+  .ui-stepper__item:last-child .ui-stepper__connector {
+    display: none;
+  }
+}
+
+.ui-stepper__connector--complete {
+  background: var(--color-border-success);
+}

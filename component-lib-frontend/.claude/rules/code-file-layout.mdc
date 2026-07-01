@@ -1,0 +1,171 @@
+---
+description: Uniform TS/TSX layout — grouped imports, section comments, variables before return, JSX block comments
+globs: component-lib-frontend/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Code file layout (TypeScript / React)
+
+Same structure in **every** `.ts` / `.tsx` file under `component-lib-frontend/` so the codebase is easy to read and manage.
+
+Works together with **`ai-doc-standard.mdc`** (markdown docs + pointer here).
+
+---
+
+## 1. File order (top → bottom)
+
+1. **Imports** (organized + group comment each)
+2. **Types** (interfaces / types used in this file)
+3. **Constants** (module-level)
+4. **Helper functions** (private, pure when possible)
+5. **Main component(s) or exports**
+
+---
+
+## 2. Imports (always first)
+
+**Order:** React/Next → external npm → `@/` aliases → relative `./`
+
+- Blank line between groups
+- One short **line comment** above each group (same style in every file)
+- `import type` for type-only imports
+
+```tsx
+// React
+import { forwardRef, useState } from "react";
+import type { InputHTMLAttributes } from "react";
+
+// UI — styles and shared types
+import { fieldControlClass, inputClass, resolveFieldStatus } from "@/components/ui/styles";
+import type { BaseFieldControlProps } from "@/types/fields";
+
+// Utils
+import { cn } from "@/utils";
+```
+
+---
+
+## 3. Group functions, variables, and components
+
+Use **`// --- Section name ---`** before each group. Skip sections that are empty.
+
+**Module-level (non-component files):**
+
+```ts
+// --- Types ---
+// --- Constants ---
+// --- Public API ---
+// --- Private helpers ---
+```
+
+**Inside a component (before `return`):**
+
+```tsx
+export function Example() {
+  // --- Hooks & state ---
+  const [value, setValue] = useState("");
+
+  // --- Refs ---
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // --- Derived values ---
+  const isInvalid = value.length > 0 && !value.includes("@");
+
+  // --- Effects ---
+  useEffect(() => { /* … */ }, [value]);
+
+  // --- Handlers ---
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
+  // --- Render guards --- (optional early returns)
+  if (!ready) return null;
+
+  return ( /* JSX below */ );
+}
+```
+
+**Rules:**
+
+- **All variables, hooks, derived values, and handlers live above `return`** — not between JSX nodes
+- Do not scatter `const` inside the JSX tree
+- Props are destructured in the function parameter list (no extra comment block needed)
+
+---
+
+## 4. `return` — JSX only + uniform block comments
+
+After all logic is defined, `return` contains **markup only** (plus expressions already prepared above).
+
+Put a **JSX comment** immediately **above** each major element or sub-component:
+
+```tsx
+  return (
+    <div className="ui-form-field">
+      {/* Status badge */}
+      {status ? <FormFieldStatusBadge>…</FormFieldStatusBadge> : null}
+
+      {/* Label and control */}
+      <div className="ui-form-field__label-block">
+        {/* Field label */}
+        <Label htmlFor={controlId}>{label}</Label>
+
+        {/* Form control */}
+        {control}
+      </div>
+
+      {/* Helper text */}
+      {description ? <HelperText>…</HelperText> : null}
+    </div>
+  );
+```
+
+### JSX comment rules
+
+- Format: `{/* Short description */}`
+- **Sentence case**, **3–8 words**, describes **what the block is for**
+- One comment per **logical** block (status, label, control, actions, error, list, modal body)
+- **Reuse the same phrases** across files:
+
+  | Block | Preferred comment |
+  |-------|-------------------|
+  | Top validation/status | `Status badge` |
+  | `<Label>` | `Field label` |
+  | Input/Select/etc. | `Form control` |
+  | Helper under field | `Helper text` |
+  | Submit/cancel row | `Form actions` |
+  | Loading UI | `Loading state` |
+
+- Do **not** comment every `<div>` wrapper unless layout is non-obvious
+- Do **not** narrate implementation (`{/* calls setState */}`)
+
+---
+
+## 5. Non-component `.ts` files
+
+Same import rules. Group exports with `// --- Section ---` comments.
+
+---
+
+## 6. When editing
+
+- Align **touched regions** to this layout; do not reformat entire files for comments only
+- Match import group comments and JSX labels used in **sibling files** (e.g. other `ui/*` components)
+
+## 7. Do not
+
+- Remove or shorten existing useful comments when refactoring — **improve and uniform**, don’t strip
+- Put CHANGE TIMELINE / Purpose templates inside `.tsx` files
+- Declare new hooks after `return`
+- Use vague JSX comments (`{/* stuff */}`, `{/* div */}`)
+
+## Checklist
+
+```
+[ ] Imports first, grouped, each group has a // comment
+[ ] Types → constants → helpers → component order
+[ ] Body: Hooks → Refs → Derived → Effects → Handlers → guards
+[ ] All variables/logic above return
+[ ] return: {/* comment */} on each major UI block, consistent wording
+```

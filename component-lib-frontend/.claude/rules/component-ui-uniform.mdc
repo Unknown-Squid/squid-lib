@@ -1,0 +1,16 @@
+---
+description: UI primitives must stay uniform, responsive, and props-driven
+globs: component-lib-frontend/src/components/ui/**/*
+alwaysApply: false
+---
+
+# UI component uniformity
+
+When editing files under `src/components/ui/`:
+
+1. Follow skill **component-creation** (`.cursor/skills/squid-component-library/component-creation-skill/SKILL.md`).
+2. **Uniform** — tokens from `styles/globals.css`; shared `fieldControlClass` / `components.css`; no ad-hoc colors or focus styles.
+3. **Responsive** — `w-full` on fields, `min-w-0` in flex layouts, no fixed pixel widths on primitives.
+4. **Props** — expose `className` (last in `cn`), `size`/`variant`/state props; spread native HTML attributes.
+
+Refactor drift in the same PR when you touch a file that violates the contract.

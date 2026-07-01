@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "./index.css";
+
+@theme inline {
+  --color-background: var(--color-background-primary);
+  --color-foreground: var(--color-text-primary);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--color-surface-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-input);
+}
+
+/* Global readability guardrail: field chrome must stay visible on any page surface. */
+.ui-field-control {
+  background: var(--color-surface-field);
+  border-color: var(--color-border-primary);
+  color: var(--color-text-primary);
+}

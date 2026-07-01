@@ -1,0 +1,20 @@
+/** Anchor ids for /docs sidebar — keep in sync with `docs-content.tsx` sections. */
+export const DOC_NAV = [
+  { id: "button", label: "Button" },
+  { id: "badge", label: "Badge" },
+  { id: "input", label: "Input" },
+  { id: "textarea", label: "Textarea" },
+  { id: "select", label: "Select" },
+  { id: "checkbox", label: "Checkbox" },
+  { id: "radio-group", label: "RadioGroup" },
+  { id: "switch", label: "Switch" },
+  { id: "password-field", label: "PasswordField" },
+  { id: "file-input", label: "FileInput" },
+  { id: "label", label: "Label" },
+  { id: "helper-text", label: "HelperText" },
+  { id: "field-error", label: "FieldError" },
+  { id: "form-field", label: "FormField" },
+  { id: "alert-dialog", label: "AlertDialog" },
+  { id: "toast", label: "Toast" },
+  { id: "stepper", label: "Stepper" },
+] as const;

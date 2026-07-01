@@ -1,0 +1,11 @@
+.ui-helper-text {
+  font-size: var(--font-size-helper);
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}
+
+.ui-field-error {
+  font-size: var(--font-size-helper);
+  font-weight: 400;
+  color: var(--color-text-danger);
+}

@@ -1,0 +1,82 @@
+{
+  "name": "squid-lib-frontend",
+  "version": "1.0.0",
+  "description": "Token-driven React UI component library with form validation, accessibility, and mobile responsiveness",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geraldfegalan/squid-lib.git",
+    "directory": "component-lib-frontend"
+  },
+  "homepage": "https://github.com/geraldfegalan/squid-lib",
+  "bugs": {
+    "url": "https://github.com/geraldfegalan/squid-lib/issues"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "form",
+    "validation",
+    "zod",
+    "typescript",
+    "accessible",
+    "a11y"
+  ],
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./components": "./src/components/index.ts",
+    "./components/ui": "./src/components/ui/index.ts",
+    "./hooks": "./src/hooks/index.ts",
+    "./utils": "./src/utils/index.ts",
+    "./types": "./src/types/index.ts",
+    "./validation": "./src/validation/index.ts",
+    "./services": "./services/index.ts",
+    "./styles": "./styles/index.css",
+    "./styles/tokens": "./styles/tokens.css",
+    "./styles/fields": "./styles/fields/",
+    "./styles/components": "./styles/components/"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "next": "16.2.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "zod": "^4.4.3"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^5.1.2",
+    "@storybook/addon-a11y": "^10.3.6",
+    "@storybook/addon-docs": "^10.3.6",
+    "@storybook/addon-onboarding": "^10.3.6",
+    "@storybook/addon-vitest": "^10.3.6",
+    "@storybook/nextjs-vite": "^10.3.6",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitest/browser-playwright": "^4.1.6",
+    "@vitest/coverage-v8": "^4.1.6",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "eslint-plugin-storybook": "^10.3.6",
+    "playwright": "^1.60.0",
+    "storybook": "^10.3.6",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vite": "^8.0.12",
+    "vitest": "^4.1.6"
+  }
+}

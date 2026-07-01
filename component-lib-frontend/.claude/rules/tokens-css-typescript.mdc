@@ -1,0 +1,51 @@
+---
+description: Design tokens in CSS variables, per-component CSS files, TypeScript primitives with strict field types
+globs: component-lib-frontend/**/*
+alwaysApply: false
+---
+
+# Tokens, CSS files, and strict TypeScript
+
+## Tokens (required)
+
+All colors, fonts, radii, spacing, and focus rings live in **`component-lib-frontend/styles/tokens.css`** as `--*` variables. Never hard-code hex/rgb in components.
+
+Change the theme by editing tokens only (or `/theme` overrides that write to `:root`).
+
+## CSS layout (required)
+
+| Path | Purpose |
+|------|---------|
+| `styles/tokens.css` | Variables only |
+| `styles/fields/*.css` | Reusable field styles (vanilla + React) |
+| `styles/components/*.css` | Button, badge, label, form-field shell |
+| `styles/index.css` | Imports all partials |
+| `styles/globals.css` | App entry: Tailwind + tokens + index |
+
+**Do not** put presentation in long Tailwind strings on primitives. Use classes such as `ui-field-control`, `ui-input`, `ui-btn--primary`.
+
+New field type → add `styles/fields/<name>.css` and import it in `index.css`.
+
+Vanilla HTML example:
+
+```html
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="fields/field-shared.css" />
+<link rel="stylesheet" href="fields/input.css" />
+<input class="ui-field-control ui-input" />
+```
+
+## TypeScript (required)
+
+- Components live under `src/components/ui/` as `.tsx` + `index.ts`.
+- Shared prop types: **`src/types/fields.ts`** (`FieldSize`, `FieldStatus`, `BaseFieldControlProps`, `ButtonVariant`, etc.).
+- Class name helpers: **`src/components/ui/styles.ts`** (`fieldControlClass`, `inputClass`, `buttonClass`) — thin mapping to CSS classes only.
+- Extend native HTML attribute types with `Omit<..., "size">` when `size` is the design-system enum.
+- `className` always last in `cn()`.
+
+## Checklist for new/changed primitives
+
+- [ ] Tokens used (no ad-hoc colors in TSX)
+- [ ] Styles in `styles/fields/` or `styles/components/`
+- [ ] Props typed via `src/types/fields.ts`
+- [ ] Storybook + `tsc` + `npm run build`

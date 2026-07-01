@@ -1,0 +1,60 @@
+---
+description: Master guardrails for squid component library — design, a11y, distribution, validation
+globs: component-lib-frontend/**/*
+alwaysApply: false
+---
+
+# Library guardrails (master)
+
+**First:** read **`.cursor/ORCHESTRATION.md`** for the full loading order after a user prompt.
+
+When changing **any** `component-lib-frontend` UI, validation, or styles, satisfy **all** applicable rules below.
+
+## Rule map (apply what matches the task)
+
+| Topic | Rule file |
+|-------|-----------|
+| Tokens + per-file CSS + TS field enums | `tokens-css-typescript.mdc` |
+| Uniform UI primitives + responsive + props | `component-ui-uniform.mdc` |
+| Imports + JSX section comments | `code-file-layout.mdc` |
+| Markdown / module docs | `ai-doc-standard.mdc` |
+| Zod + FormField messages | `form-validation-zod.mdc` |
+| npm / clone + CSS dual-path | `library-distribution.mdc` |
+
+## Design system (non-negotiable)
+
+- Colors, fonts, radii, focus: **CSS variables** (`styles/tokens.css`) — no random hex in components.
+- Primitives use **`ui-*` classes** from `styles/fields/` and `styles/components/`.
+- **FormField** for label + status badges + `fieldStatus` on controls.
+
+## Accessibility
+
+- Native controls where possible; `aria-*` + focus rings preserved.
+- Icon-only: caller supplies `aria-label`.
+- Error: `aria-invalid` + visible message (badge or text).
+
+## Shipped primitives (follow same patterns for future additions)
+
+| Need | Direction |
+|------|-----------|
+| **Alert / confirm** | `AlertDialog` is shipped (focus trap, `role="alertdialog"`, tokenized surface). Keep the same headless + token-first pattern for variants. |
+| **Toast queue** | `ToastProvider` + `useToast` are shipped (`aria-live`, stacked toasts). Extend behavior without introducing heavy deps. |
+| **Form progress / steps** | `Stepper` is shipped (`steps[]`, `currentIndex`, optional `onStepClick`). Keep token-driven spacing and states. |
+
+Implement via **component-creation** + **tokens-css-typescript**; marketing chrome via **frontend-design** only outside `src/components/ui/`.
+
+## Skills (on-demand)
+
+- **component-creation** — new primitive
+- **form-validation** — Zod + forms
+- **library-distribution** — consumer import + CSS
+- **planned-overlays** — reference history and extension guidelines for alert / toast / stepper
+
+## Ship gate
+
+Before calling a feature “done”:
+
+1. `tsc` + `next build`
+2. Storybook coverage for the component
+3. Docs or playground example
+4. `PROJECT_ROADMAP.md` day item checked off

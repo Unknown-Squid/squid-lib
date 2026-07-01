@@ -1,0 +1,25 @@
+---
+description: How agents stack rules and skills for squid-lib component-lib-frontend
+alwaysApply: true
+---
+
+# Agent workflow (squid-lib)
+
+## Before any implementation
+
+1. Read **`.cursor/ORCHESTRATION.md`** — full rule/skill map and execution order after prompting.
+2. Apply **`library-guardrails.mdc`** — which sub-rules apply to this task.
+3. User message + attached files.
+
+## Order of truth (during the task)
+
+1. Matching **`.cursor/rules/*.mdc`** for the file glob or task type (see ORCHESTRATION).
+2. **Skills** by user name or task match: **component-creation**, **form-validation**, **library-distribution**, **planned-overlays**, **frontend-design** (marketing only).
+
+## Always run after substantive UI/TS changes
+
+From `component-lib-frontend/`: `npx tsc --noEmit` and `npm run build`.
+
+## Roadmap
+
+Milestones: **`component-lib-frontend/PROJECT_ROADMAP.md`** (Day_01 …).

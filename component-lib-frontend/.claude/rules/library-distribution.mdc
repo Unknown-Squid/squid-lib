@@ -1,0 +1,52 @@
+---
+description: Publishing and consuming squid-lib-frontend — npm or git clone, exports, CSS entry for Tailwind vs vanilla
+globs: component-lib-frontend/**/*
+alwaysApply: false
+---
+
+# Library distribution & consumption
+
+Goal: **same components** usable in another app via **npm package** or **git clone** + path dependency, with **props-driven** API and **dual styling** (Tailwind app + vanilla CSS files).
+
+## Package surface (`package.json` `exports`)
+
+- Do **not** remove or rename public export keys without a **major** version note and migration doc.
+- New surface: add under `exports` and document in `styles/README.md` + changelog.
+- Peer deps for consumers: `react`, `react-dom` (match `package.json` ranges). Do not bundle React.
+
+## How consumers import
+
+```ts
+import { Input, FormField, Button } from "squid-lib-frontend/components/ui";
+import { validateFieldValue } from "squid-lib-frontend/validation";
+```
+
+Path alias `@/` is **repo-internal only** — published code must use relative imports inside the package.
+
+## CSS for consumers
+
+| Consumer stack | What to import |
+|----------------|----------------|
+| **Next + Tailwind** (same as demo) | App `globals.css` already chains tokens + `styles/index.css` — document required import order. |
+| **Vanilla / no Tailwind** | Ship `styles/tokens.css` + `styles/fields/*.css` (see `styles/README.md`). Apply `ui-field-control ui-input` classes. |
+| **Clone / monorepo** | `file:../squid-lib/component-lib-frontend` or workspace protocol; same rules. |
+
+- Field chrome lives in **`styles/fields/`** (e.g. `input.css`) — **single source** for React and HTML.
+- Do not duplicate field rules in consumer-only CSS.
+
+## Flexibility contract
+
+- **Behavior + layout variants** → props (`size`, `variant`, `className`, `fieldStatus`).
+- **Theme** → CSS variables in `tokens.css`, not prop explosion.
+- **`className` last** in `cn()` so hosts can override.
+
+## Check before merge
+
+- [ ] `npm run build` + `npx tsc --noEmit` in `component-lib-frontend/`
+- [ ] Storybook story for new or changed public component
+- [ ] Exports updated if new entry point
+- [ ] No `@/` in files that are meant to be published paths (internal only is OK inside package if bundler resolves — prefer relative for new shared modules)
+
+## Related rules
+
+`tokens-css-typescript.mdc`, `component-ui-uniform.mdc`, `form-validation-zod.mdc`, `code-file-layout.mdc`

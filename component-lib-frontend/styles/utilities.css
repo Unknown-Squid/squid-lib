@@ -1,0 +1,40 @@
+.ui-sr-only,
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Legacy input wrap aliases */
+.input-wrap,
+.ui-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.input-wrap .ui-field-control,
+.ui-input-wrap .ui-field-control {
+  padding-inline-start: 2.25rem;
+}
+
+.input-icon,
+.ui-input-wrap__icon {
+  position: absolute;
+  inset-inline-start: 0.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}

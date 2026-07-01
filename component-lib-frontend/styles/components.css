@@ -1,0 +1,2 @@
+/** @deprecated Import via globals.css → index.css. Kept for backwards compatibility. */
+@import "./index.css";
